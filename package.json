@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://gzbfgjf2.github.io/visx-drag-data/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
