@@ -12,7 +12,6 @@ async function readJsonFile() {
 
 const fetcher = async () => {
   let data = await readJsonFile();
-  console.log(data);
   return data;
 };
 

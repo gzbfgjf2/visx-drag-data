@@ -155,7 +155,7 @@ function LegendDemo({ title, children }) {
   );
 }
 
-function Bars({ handleMouseOver, handleMouseOut }) {
+function Bars() {
   const { data } = useData();
   const barWidth = useBarWidth();
   return range(data[0].length).map((j) => (
@@ -164,15 +164,6 @@ function Bars({ handleMouseOver, handleMouseOut }) {
       left={j * barWidth + margin.left - barWidth / 2}
       top={margin.top}
     >
-      {/* <Bar */}
-      {/*   key={`bar-${i}`} */}
-      {/*   className="hover:fill-blue-300 fill-blue-400" */}
-      {/*   width={barWidth} */}
-      {/*   height={yMax} */}
-      {/*   opacity="0.5" */}
-      {/*   onMouseOver={handleMouseOver} */}
-      {/*   onMouseOut={handleMouseOut} */}
-      {/* /> */}
       <Brush j={j} />
     </Group>
   ));
@@ -268,6 +259,7 @@ function Brush({ j }) {
         newSelection.push(i);
       }
     }
+    newSelection.sort((a, b) => b - a);
     setSelection(newSelection);
   };
 
@@ -304,27 +296,13 @@ function Brush({ j }) {
         >
           <HtmlLabel
             showAnchorLine={false}
-            // anchorLineStroke={greens[2]}
             horizontalAnchor="start"
-            //verticalAnchor={verticalAnchor}
-            // containerStyle={{
-            //   width: barWidth,
-            //   // height=""
-            //   background: "transparent",
-            //   border: `1px `,
-            //   borderRadius: 5,
-            //   // color: greens[2],
-            //   fontSize: "0.55em",
-            //   lineHeight: "1em",
-            //   padding: "0 3em 3px 3px",
-            //   fontWeight: 100,
-            // }}
             className="text-xs font-mono"
           >
             <div
               className={`flex flex-col bg-violet-500/30 w-[80px] border-violet-900 border p-2`}
             >
-              {selection.reverse().map((i) => (
+              {selection.map((i) => (
                 <div key={i} className="font-light  ">
                   {data[i][j].toFixed(4)}
                 </div>
@@ -338,24 +316,6 @@ function Brush({ j }) {
 }
 
 export function Drag(props) {
-  console.log("render drag");
-  // const {
-  //   tooltipData,
-  //   tooltipLeft,
-  //   tooltipTop,
-  //   tooltipOpen,
-  //   showTooltip,
-  //   hideTooltip,
-  // } = useTooltip();
-  // const handleMouseOver = (event, datum) => {
-  //   console.log("over");
-  //   const coords = localPoint(event.target.ownerSVGElement, event);
-  //   showTooltip({
-  //     tooltipLeft: coords.x,
-  //     tooltipTop: coords.y,
-  //     tooltipData: datum,
-  //   });
-  // };
   const colorScale = useColorScale();
   const { notSelectedRows, toggleRow } = useNotSelectedRowsStore();
   return (
@@ -387,20 +347,7 @@ export function Drag(props) {
           />
           <LinePaths />
           <Circles />
-          <Bars
-          // handleMouseOver={handleMouseOver}
-          // handleMouseOut={hideTooltip}
-          />
-          {/* <text */}
-          {/*   x={500} */}
-          {/*   y={50} */}
-          {/*   fontSize={28} */}
-          {/*   fontWeight={900} */}
-          {/*   textAnchor="middle" */}
-          {/*   fill="#222" */}
-          {/* > */}
-          {/*   2D data with drag */}
-          {/* </text> */}
+          <Bars />
         </svg>
       </div>
       <LegendDemo title="row selection">
@@ -412,7 +359,6 @@ export function Drag(props) {
                 margin="1px 0"
                 onClick={(events) => {
                   if (events) toggleRow(label.datum);
-                  console.log(notSelectedRows);
                 }}
               >
                 <svg width={20} height={20}>
