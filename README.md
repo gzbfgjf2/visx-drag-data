@@ -1,8 +1,6 @@
-# React + Vite
+# VISX draggable graph
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Create an interactive selection box to choose the desired data, and then drag
+the selection area to modify the data accordingly.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [demo](https://gzbfgjf2.github.io/visx-drag-data/)
